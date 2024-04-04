@@ -1,28 +1,32 @@
-import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { catchError, map, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiHandlerService {
 
-  public url : string  = "https://api.skillspire.in/api/program";
-  public sort_By : string = "start_date"
+  
+  public sort_By : string | any = "start_date"
 
   constructor( private http : HttpClient) { }
 
-  doGet(  ) {
-    
-   let paramsQuery = new HttpParams();
-     paramsQuery = paramsQuery.append('sortBy',this.sort_By);
-     paramsQuery = paramsQuery.append('limit',6);
-     paramsQuery = paramsQuery.append('page',1) 
-     
-     console.log(paramsQuery)
-    return this.http.get(`${this.url}`,{params:paramsQuery})
+  ngOnInit(): void {
+    //  this.doGet()
+    //  console.log(this.demo_url);
+  }
 
-     // console.log(res)
+  doGet(url:string ) {
+    return this.http.get(url).pipe(
+      map((res:any) => {
+         console.log(res);
+         return res.DATA.programs;
+         
+      }),
+      catchError(this.handelError),
+      
+    ) 
     }
   
 
@@ -31,5 +35,22 @@ export class ApiHandlerService {
   }
   put( ) {
 
+  }
+
+  public handelError(error: HttpErrorResponse) {
+    
+    let errorMessage : any = '';
+    if(error.error instanceof ErrorEvent) {
+      // Client side error
+      console.log("client side");
+       errorMessage = error
+    } 
+    else {
+      // Server side error 
+      console.log("serve side");
+      errorMessage = error ;
+    }
+    console.log(errorMessage);
+    return errorMessage
   }
 }  

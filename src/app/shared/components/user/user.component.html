@@ -1,0 +1,15 @@
+<p>User Works</p>
+    @if (demo_UserData$ | async; as users ) {
+        @for ( user of users; track user) {
+            {{user.title}}<br>
+    
+           }
+    }
+<!-- <div *ngIf="demo_UserData$ | async as users">
+   
+
+       @for ( user of users; track user) {
+        {{user.title}}<br>
+
+       }
+</div> -->

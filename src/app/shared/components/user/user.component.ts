@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, pipe, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user/user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ApiHandlerService } from '../../services/Api-Handler/api-handler.service';
 
 @Component({
   selector: 'app-user',
@@ -13,36 +14,27 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class UserComponent {
   
-  userData$!: Observable<any> | any;
+  userData$!: Observable<any> ;
+  demo_UserData$!: Observable<any>  ;
   data : any ;
+  error :any ;
+  // erro_Message : any
+   
 
-  constructor ( public us : UserService) { }
+  constructor ( public us : UserService ,
+                public http : HttpClient,
+                public api_H : ApiHandlerService,
+                         ) { }
 
   ngOnInit() {
-      const api =   this.us.get_User_Data()
-      console.log(api)
-    this.userData$ = this.get_Data();
-    console.log(this.userData$)
-    this.get_Data()
+    
+   
+    this.demo_UserData$ = this.us.get_User_Data()
+
+    
+     this.us.get_User_Data().subscribe((res:any) => {
+      console.log(res);
+     })
   }
-
-  // getUserData(): Observable<any> {
-  //   return new Observable((observer) => {
-
-  //     const user_data = {
-  //       firstName: 'John',
-  //       lastName: 'Doe',
-  //       age: 50,
-  //       eyeColor: 'blue',
-  //     };
-
-  //     observer.next(user_data); 
-  //   });
-  // }
-
-  get_Data(){
-      return  new Observable((observer) => {
-      observer.next(this.us.get_User_Data())
-      })                                            // this.us.get_User_Data(data);
-  }
+  
 }
