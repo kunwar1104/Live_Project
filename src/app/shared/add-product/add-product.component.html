@@ -1,0 +1,151 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <h4>{{title}}</h4>
+    <h4>{{title1}}</h4>
+  </h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- /add -->
+  <form >
+    <div class="card ">
+      <div class="card-body add-product ">
+        <div  >
+          <div >
+            <div class="accordion-header" id="headingOne">
+
+            </div>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <form [formGroup]="add_Product_Form" (ngSubmit)="submit()">
+
+                  <div class="row">
+                    <div class="col-lg-6 col-sm-6 col-12">
+                      <div class="mb-3 add-product">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" class="form-control" required="product" id="product" name="product"
+                          formControlName="product" />
+
+                        <div class=""
+                          *ngIf="add_Product_Form.get('product')?.invalid && add_Product_Form.get('product')?.touched">
+                          <div class="error-alert" role="alert"
+                            *ngIf="add_Product_Form.get('product')?.hasError('required')">Product Name is required</div>
+                          <div class="error-alert" role="alert"
+                            *ngIf="add_Product_Form.get('product')?.hasError('maxlength')">Maximum Length is 255</div>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-6 col-12">
+                      <div class="mb-3 add-product">
+                        <div class="add-newplus">
+                          <label class="form-label">Category</label>
+                        </div>
+
+                        <select class="form-select select custom-mat-select" formControlName="category"
+                          aria-label="Default select example">
+                          @for( data of selectedList3; track data) {
+                          <option [value]="data.value"> {{data.value}}</option>
+                          }
+                        </select>
+
+                        <div class=""
+                          *ngIf="add_Product_Form.get('category')?.invalid && add_Product_Form.get('category')?.touched">
+                          <div class="error-alert" role="alert"
+                            *ngIf="add_Product_Form.get('category')?.hasError('required')">Category is required</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-6 col-12">
+                      <div class="mb-3 add-product">
+                        <div class="add-newplus">
+                          <label class="form-label">Brand</label>
+                        </div>
+
+                        <select class="form-select select custom-mat-select" formControlName="brand"
+                          aria-label="Default select example">
+                          <option class="select custom-mat-select" selected>Choose</option>
+                          @for( data of selectedList6; track data) {
+                          <option [value]="data.value"> {{data.value}}</option>
+                          }
+                        </select>
+
+                        <div class=""
+                          *ngIf="add_Product_Form.get('brand')?.invalid && add_Product_Form.get('brand')?.touched">
+                          <div class="error-alert" role="alert"
+                            *ngIf="add_Product_Form.get('brand')?.hasError('required')">Brand is required</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-6 col-12">
+                      <div class="mb-3 add-product">
+                        <label class="form-label">Item Code </label>
+                        <input type="text" class="form-control" formControlName="itemCode" />
+                        <div class=""
+                          *ngIf="add_Product_Form.get('itemCode')?.invalid && add_Product_Form.get('itemCode')?.touched">
+                          <div class="error-alert" role="alert"
+                            *ngIf="add_Product_Form.get('itemCode')?.hasError('required')">ItemCode is required</div>
+                          <div class="error-alert" role="alert"
+                            *ngIf="add_Product_Form.get('itemCode')?.hasError('maxlength')">Maximum Length is 255</div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="addservice-info">
+                    <div class="row">
+
+                    </div>
+                  </div>
+
+                  <div class="add-product-new">
+                    <div class="row">
+
+                    </div>
+                  </div>
+                  <div class="row">
+
+                  </div>
+
+                  <!-- Editor -->
+                  <!-- Description -->
+                  <div class="col-lg-12 ps-0  pe-0">
+                    <div class="input-blocks summer-description-box transfer mb-3">
+                      <label>Description</label>
+                      <textarea class="form-control h-100" rows="5" formControlName="description"></textarea>
+                      <p class="mt-1">Maximum 255 Characters</p>
+                    </div>
+                    <div class=""
+                      *ngIf="add_Product_Form.get('description')?.invalid && add_Product_Form.get('description')?.touched">
+                      <div class="error-alert" role="alert"
+                        *ngIf="add_Product_Form.get('description')?.hasError('required')">Description is required</div>
+                      <div class="error-alert" role="alert"
+                        *ngIf="add_Product_Form.get('description')?.hasError('maxlength')">
+                        Maximum Length is 255
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <!-- /Editor -->
+                  <!-- <button type="submit"  >Add Product</button> -->
+                  <div class="col-lg-12">
+                    <div class="btn-addproduct  modal-footer">
+                      <button type="button" class="btn btn-cancel me-2" (click)="bsModalRef.hide()">Cancel</button>
+                      <button type="submit" (click)="submit()" class="btn btn-submit">{{title}}{{title1}}</button>
+                    </div>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /add -->

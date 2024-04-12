@@ -11,7 +11,7 @@ export class UserService {
     
   userData$! : Observable<any> 
   query:any ;
-    url : string = "https://api.skillspire.in/api/programaa/?sortBy=start_date&limit=6&page=1";
+    url : string = "https://api.skillspire.in/api/program/?sortBy=start_dat11e&limit=6&page=1";
   constructor( public  api_Handler :  ApiHandlerService) { }
 
   ngOnInit(): void {
